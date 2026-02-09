@@ -69,7 +69,7 @@ class B1DataPipeline:
     def ingest_data(self):
         """Download data"""
         ingester = MarketDataIngestion(self.config)
-        tickers = ingester.get_sp500_tickers(limit=10)
+        tickers = ingester.get_sp500_tickers(limit=100)
         market_data = ingester.download_market_data(tickers)
         macro_data = ingester.download_macro_data()
         ingester.save_raw_snapshots(market_data, macro_data, self.version_date)

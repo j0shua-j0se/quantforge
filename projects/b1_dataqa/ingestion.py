@@ -31,7 +31,31 @@ class MarketDataIngestion:
             return tickers[:limit]
         except Exception as e:
             logger.warning(f"Wikipedia failed, using backup list: {e}")
-            return ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'TSLA', 'META', 'JPM', 'JNJ', 'WMT']
+            return [
+    # Mega Cap (10)
+    'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'NVDA', 'TSLA', 'META', 'BRK-B', 'JPM', 'V',
+    # Large Cap Tech (20)
+    'MA', 'NFLX', 'CSCO', 'ADBE', 'CRM', 'ORCL', 'INTC', 'AMD', 'QCOM', 'TXN',
+    'AVGO', 'IBM', 'NOW', 'INTU', 'AMAT', 'MU', 'LRCX', 'KLAC', 'SNPS', 'CDNS',
+    # Finance (15)
+    'BAC', 'WFC', 'C', 'GS', 'MS', 'BLK', 'SCHW', 'AXP', 'SPGI', 'CME',
+    'USB', 'PNC', 'TFC', 'COF', 'BK',
+    # Healthcare (15)
+    'JNJ', 'UNH', 'PFE', 'ABBV', 'TMO', 'ABT', 'LLY', 'MRK', 'DHR', 'BMY',
+    'AMGN', 'GILD', 'CVS', 'CI', 'HUM',
+    # Consumer (15)
+    'WMT', 'HD', 'MCD', 'NKE', 'COST', 'SBUX', 'TGT', 'LOW', 'TJX', 'DG',
+    'CMG', 'YUM', 'ROST', 'ULTA', 'BURL',
+    # Industrials (10)
+    'BA', 'CAT', 'DE', 'UPS', 'HON', 'UNP', 'RTX', 'LMT', 'GE', 'MMM',
+    # Energy (5)
+    'XOM', 'CVX', 'COP', 'SLB', 'EOG',
+    # Consumer Staples (5)
+    'PG', 'KO', 'PEP', 'PM', 'MDLZ',
+    # Utilities & Telecom (5)
+    'NEE', 'DUK', 'SO', 'T', 'VZ'
+][:limit]  # Return only the requested limit
+
     
     def download_market_data(self, tickers: List[str] = None) -> pd.DataFrame:
         """Download OHLCV data from yfinance"""
