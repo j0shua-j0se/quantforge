@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/708516848321159268/2438dd88528c47bd90e8640eeb1d6844/artifacts
+end_time: 1770644761357
+entry_point_name: ''
+experiment_id: '708516848321159268'
+lifecycle_stage: active
+run_id: 2438dd88528c47bd90e8640eeb1d6844
+run_name: momentum_baseline
+run_uuid: 2438dd88528c47bd90e8640eeb1d6844
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1770644760442
+status: 3
+tags: []
+user_id: root

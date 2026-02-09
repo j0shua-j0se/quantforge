@@ -1,0 +1,49 @@
+(
+echo # Data - versioned separately
+echo data/market/*.parquet
+echo data/macro/*.parquet
+echo data/edgar/
+echo data/features/
+echo data/snapshots/*.parquet
+echo backtests/results/
+echo backtests/trades/
+echo backtests/metrics/
+echo.
+echo # Python cache
+echo __pycache__/
+echo *.py[cod]
+echo *.pyo
+echo *.so
+echo .Python
+echo build/
+echo dist/
+echo *.egg-info/
+echo.
+echo # Virtual environments
+echo venv/
+echo env/
+echo ENV/
+echo.
+echo # MLflow
+echo mlruns/
+echo .mlflow/
+echo.
+echo # Environment variables
+echo .env
+echo .env.local
+echo.
+echo # IDE
+echo .vscode/
+echo .idea/
+echo *.swp
+echo.
+echo # OS
+echo Thumbs.db
+echo desktop.ini
+echo.
+echo # DVC
+echo .dvc/cache/
+echo.
+echo # Jupyter
+echo .ipynb_checkpoints/
+) > .gitignore

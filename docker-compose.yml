@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  quantforge:
+    build: .
+    container_name: quantforge-dev
+    volumes:
+      - .:/quantforge
+    environment:
+      - PYTHONUNBUFFERED=1
+      - SEED=42
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    networks:
+      - quantforge-net
+    depends_on:
+      - mlflow
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.9.0
+    container_name: quantforge-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlruns
+    networks:
+      - quantforge-net
+    command: mlflow server --host 0.0.0.0 --backend-store-uri file:///mlruns
+
+networks:
+  quantforge-net:
+    driver: bridge
