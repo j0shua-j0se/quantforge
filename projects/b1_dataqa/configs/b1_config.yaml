@@ -1,0 +1,41 @@
+pipeline:
+  name: "B1_DataQA"
+  version: "1.0.0"
+  
+data_sources:
+  yfinance:
+    universe: "sp500_top100"
+    start_date: "2015-01-01"
+    end_date: "2024-12-31"
+    interval: "1d"
+    
+  fred:
+    series:
+      - code: "DGS10"
+        name: "Treasury_10Y_Yield"
+      - code: "VIXCLS"
+        name: "VIX_Volatility"
+      - code: "UNRATE"
+        name: "Unemployment_Rate"
+    start_date: "2015-01-01"
+
+quality_checks:
+  missing_data:
+    threshold: 0.01
+  outliers:
+    method: "iqr"
+    multiplier: 3
+  volume:
+    min_volume: 1000
+    zero_volume_threshold: 0.05
+  price_continuity:
+    max_daily_jump: 0.20
+
+storage:
+  format: "parquet"
+  compression: "snappy"
+  versioning: true
+  
+logging:
+  mlflow_experiment: "B1_DataQA"
+  log_level: "INFO"
