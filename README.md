@@ -84,7 +84,7 @@ QuantForge is a Master's thesis project (M.Sc. AI) building an execution-aware, 
 
 \# Clone repository
 
-git clone https://github.com/yourusername/quantforge.git
+git clone https://github.com/j0shua-j0se/quantforge.git
 
 cd quantforge
 
