@@ -1,0 +1,22 @@
+# B3 Configuration - Simple Version
+
+# Where is your data?
+data:
+  features_file: "data/features/features_20260212.parquet"
+
+# Strategy settings
+strategies:
+  momentum:
+    enabled: true
+    long_top_percent: 30
+    short_bottom_percent: 30
+    rebalance: "monthly"
+
+# How much money to start with?
+backtest:
+  starting_cash: 1000000
+
+# Transaction costs (realistic)
+costs:
+  commission_percent: 0.05
+  slippage_percent: 0.03
