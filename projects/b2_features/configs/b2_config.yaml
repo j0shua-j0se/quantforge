@@ -1,0 +1,37 @@
+# B2 Feature Store Configuration
+version: "0.3.0"
+description: "Feature engineering pipeline with walk-forward safety"
+
+# Input data from B1
+input:
+  market_data: "data/market/market_clean_20260209.parquet"
+  macro_data: "data/macro/macro_raw_20260209.parquet"
+
+# Feature categories
+features:
+  price_momentum:
+    enabled: true
+    windows: [5, 10, 20, 50, 200]  # Moving average windows
+    
+  volatility:
+    enabled: true
+    windows: [20, 60]  # Volatility windows
+    
+  volume:
+    enabled: true
+    windows: [20]  # Volume average windows
+
+# Walk-forward safety (CRITICAL for no lookahead bias)
+walk_forward:
+  lag_features_by: 1  # Lag all features by 1 day
+  min_history: 60     # Minimum 60 days of data required
+
+# Storage
+storage:
+  output_dir: "data/features"
+  format: "parquet"
+  compression: "snappy"
+
+# Quality checks
+quality:
+  max_null_pct: 0.05  # Max 5% nulls allowed per feature
