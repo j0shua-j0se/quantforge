@@ -1,0 +1,23 @@
+# B4 Macro Regime Detection Configuration
+
+data:
+  fred_series:
+    - GDPC1        # Real GDP
+    - UNRATE       # Unemployment Rate
+    - FEDFUNDS     # Federal Funds Rate
+    - GS10         # 10-Year Treasury
+    - VIXCLS       # VIX Volatility Index
+    - CPIAUCSL     # Consumer Price Index
+  
+  start_date: "2015-01-01"
+  end_date: "2024-12-31"
+
+hmm:
+  n_regimes: 3
+  n_iter: 100
+  random_state: 42
+
+output:
+  log_level: "INFO"
+
+seed: 42
