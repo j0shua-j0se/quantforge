@@ -1,0 +1,80 @@
+# ================================================================
+# B3 Baseline Strategies - Docker Compose
+# ================================================================
+version: '3.9'
+
+services:
+  # ============================================================
+  # B3 Pipeline Service
+  # ============================================================
+  b3-pipeline:
+    build:
+      context: ../../..
+      dockerfile: projects/b3_baselines/docker/Dockerfile
+    container_name: quantforge-b3
+    image: quantforge/b3-baselines:latest
+    
+    # Environment variables
+    environment:
+      - PYTHONUNBUFFERED=1
+      - QUANTFORGE_ENV=docker
+    
+    # Volume mounts (data persistence)
+    volumes:
+      - ../../../data:/app/data:ro                    # Read-only data
+      - ../outputs:/app/projects/b3_baselines/outputs # Results output
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          cpus: '2'
+          memory: 2G
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Command (can override)
+    command: python projects/b3_baselines/pipeline.py
+
+  # ============================================================
+  # B3 Testing Service (for quick tests)
+  # ============================================================
+  b3-test:
+    build:
+      context: ../../..
+      dockerfile: projects/b3_baselines/docker/Dockerfile
+    container_name: quantforge-b3-test
+    image: quantforge/b3-baselines:latest
+    
+    environment:
+      - PYTHONUNBUFFERED=1
+      - QUANTFORGE_ENV=docker-test
+    
+    volumes:
+      - ../../../data:/app/data:ro
+      - ../outputs:/app/projects/b3_baselines/outputs
+    
+    # Override command for testing
+    command: python projects/b3_baselines/backtest.py
+    
+    profiles:
+      - test
+
+# ================================================================
+# Networks (optional)
+# ================================================================
+networks:
+  default:
+    name: quantforge-network
+    driver: bridge
+
+# ================================================================
+# Volumes (optional persistent storage)
+# ================================================================
+volumes:
+  b3-outputs:
+    name: quantforge-b3-outputs

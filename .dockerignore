@@ -1,0 +1,50 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+quantforge/
+
+# Data files (too large)
+*.parquet
+*.csv
+*.h5
+*.pkl
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+mlruns/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+*.md
+docs/
+
+# Outputs (generated at runtime)
+projects/b3_baselines/outputs/
+backtests/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
