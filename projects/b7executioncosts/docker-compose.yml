@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  b7-execution:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quantforge-b7
+    volumes:
+      - ../../data:/app/data:ro
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python pipeline.py

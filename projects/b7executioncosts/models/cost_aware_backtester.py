@@ -99,7 +99,6 @@ class CostAwareBacktester:
                 
                 new_weights = pd.Series(0.0, index=prices.columns)
                 new_weights[top_20] = 1.0 / 20  # Equal weight top 20
-
                 
                 # Calculate rebalancing cost
                 cost, _ = self.cost_model.compute_portfolio_rebalance_cost(
