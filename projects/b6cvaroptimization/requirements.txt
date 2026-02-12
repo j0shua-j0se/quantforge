@@ -1,0 +1,17 @@
+# Core dependencies
+numpy==1.26.4
+pandas==2.3.3
+scipy==1.14.1
+matplotlib==3.10.8
+
+# Portfolio optimization
+cvxpy==1.5.0
+
+# Configuration
+pyyaml==6.0.2
+
+# Logging
+loguru==0.7.2
+
+# Data processing
+pyarrow==18.1.0

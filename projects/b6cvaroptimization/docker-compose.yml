@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  b6-optimizer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: quantforge-b6:latest
+    container_name: b6-portfolio-optimizer
+    
+    # GPU support (requires nvidia-docker)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
+    # Mount data and outputs
+    volumes:
+      - ../../data:/app/data:ro  # Read-only data
+      - ./outputs:/app/outputs    # Writable outputs
+      - ./logs:/app/logs          # Logs
+    
+    # Environment variables
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTHONUNBUFFERED=1
+    
+    # Override default command
+    command: python3 pipeline.py
+    
+    # Network (for TensorBoard)
+    ports:
+      - "6006:6006"
+  
+  # TensorBoard service (optional)
+  tensorboard:
+    image: tensorflow/tensorflow:latest
+    container_name: b6-tensorboard
+    volumes:
+      - ./logs/tensorboard:/logs
+    command: tensorboard --logdir=/logs --host=0.0.0.0
+    ports:
+      - "6007:6006"
+    depends_on:
+      - b6-optimizer
