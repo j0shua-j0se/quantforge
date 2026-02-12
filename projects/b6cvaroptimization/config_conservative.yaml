@@ -1,0 +1,39 @@
+# B6 CVaR Portfolio Optimization Configuration
+
+project:
+  name: "B6-CVaR-Optimization"
+  version: "1.0.0"
+
+data:
+  signals_file: "../../data/trading_signals_b4_b5_20260212.csv"
+  features_file: "../../data/features/features_20260212.parquet"
+  regimes_file: "../../data/regimes/regime_labels_20260212_032842.csv"
+
+optimizer:
+  alpha: 0.95
+  target_cvar: -0.04
+  risk_penalty: 0.10
+  allow_shorts: false
+
+  regime_constraints:
+    expansion:
+      max_weight: 0.15
+    transition:
+      max_weight: 0.10
+    crisis:
+      max_weight: 0.05
+
+backtest:
+  train_window: 756
+  test_window: 252
+
+performance:
+  target_sharpe: 1.5
+  target_max_dd: -0.12
+
+logging:
+  level: "INFO"
+  console: true
+
+output:
+  results_dir: "outputs"
