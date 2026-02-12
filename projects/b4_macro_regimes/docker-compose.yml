@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  b4-regime-detection:
+    build:
+      context: ../../..
+      dockerfile: projects/b4_macro_regimes/docker/Dockerfile
+    image: quantforge/b4-regimes:latest
+    container_name: quantforge-b4
+    environment:
+      - FRED_API_KEY=${FRED_API_KEY}
+    volumes:
+      - ../../../data/macro:/app/data/macro
+      - ../../../data/regimes:/app/data/regimes
+      - ../outputs:/app/projects/b4_macro_regimes/outputs
+    restart: unless-stopped

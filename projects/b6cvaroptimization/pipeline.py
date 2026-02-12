@@ -3,7 +3,7 @@ import yaml
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
-from optimizer import CVaROptimizer
+from hybrid_optimizer import HybridOptimizer
 from backtester import WalkForwardBacktester
 
 def load_config(config_path="config.yaml"):
@@ -28,7 +28,7 @@ def load_data(config):
 
 def main():
     print("="*60)
-    print("B6 CVAR PORTFOLIO OPTIMIZATION")
+    print("B6 CVAR PORTFOLIO OPTIMIZATION - HYBRID RL")
     print("="*60)
     print(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
     
@@ -36,11 +36,12 @@ def main():
     signals, features, regimes = load_data(config)
     
     print("\n" + "="*60)
-    print("INITIALIZING OPTIMIZER")
+    print("INITIALIZING HYBRID OPTIMIZER (RL + ENSEMBLE)")
     print("="*60)
-    optimizer = CVaROptimizer(
+    optimizer = HybridOptimizer(
         alpha=config['optimizer']['alpha'],
-        risk_penalty=config['optimizer']['risk_penalty']
+        risk_penalty=config['optimizer']['risk_penalty'],
+        use_rl=True
     )
     
     backtester = WalkForwardBacktester(
@@ -61,7 +62,7 @@ def main():
     output_dir.mkdir(exist_ok=True)
     
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    results_file = output_dir / f"backtest_results_{timestamp}.csv"
+    results_file = output_dir / f"backtest_results_hybrid_rl_{timestamp}.csv"
     results.to_csv(results_file, index=False)
     print(f"✓ Results saved: {results_file}")
     
