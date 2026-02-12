@@ -1,0 +1,32 @@
+# B5 EDGAR NLP Configuration
+
+edgar:
+  company_name: "QuantForge Research"
+  email: "joshua.jose2002@gmail.com"
+  cache_dir: "../../data/edgar/raw"
+  num_filings_per_ticker: 3
+  after_date: "2020-01-01"
+
+nlp:
+  model_name: "ProsusAI/finbert"
+  device: "cpu"
+  max_length: 512
+
+risk_keywords:
+  risk: 1.0
+  loss: 0.9
+  decline: 0.8
+  lawsuit: 0.9
+  litigation: 0.85
+  uncertainty: 0.7
+  bankruptcy: 1.0
+  default: 0.9
+  adverse: 0.8
+  volatile: 0.7
+
+output:
+  risk_signals_dir: "../../data/edgar"
+
+logging:
+  level: "INFO"
+  file: "logs/b5_edgar_nlp.log"
