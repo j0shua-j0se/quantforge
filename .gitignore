@@ -12,6 +12,11 @@ backtests/metrics/
 projects/b1_dataqa/outputs/
 projects/b1_dataqa/outputs/qa_reports/*.json
 
+# B5 EDGAR NLP - Large SEC filing downloads (50-80MB files)
+projects/b5_edgar_nlp/sec-edgar-filings/
+projects/b5_edgar_nlp/outputs/
+projects/b5_edgar_nlp/logs/*.log
+
 # Python cache
 __pycache__/
 *.py[cod]
