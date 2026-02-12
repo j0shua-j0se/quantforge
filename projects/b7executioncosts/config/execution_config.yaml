@@ -1,0 +1,56 @@
+# B7 Execution Cost Model Configuration
+# Date: 2026-02-12
+
+project:
+  name: "B7_ExecutionCosts"
+  version: "1.0.0"
+  author: "Joshua Jose"
+  date: "2026-02-12"
+
+# Data paths (relative to B7 folder)
+data:
+  prices: "../../data/features/features_20260212.parquet"
+  volumes: "../../data/market/market_clean_20260209.parquet"
+  b6_results: "../../data/features/features_20260212.parquet"
+
+# Execution cost parameters
+execution_costs:
+  spread:
+    large_cap_bps: 2
+    mid_cap_bps: 5
+    small_cap_bps: 10
+    default_bps: 5
+    
+  impact:
+    coefficient_k: 0.7
+    exponent_alpha: 0.6
+    volatility_multiplier: 1.0
+    
+  fees:
+    fixed_per_trade: 1.0
+    per_share: 0.005
+    max_pct: 0.01
+
+# Backtest settings
+backtest:
+  start_date: "2015-01-01"
+  end_date: "2024-12-31"
+  rebalance_frequency: "quarterly"
+  min_trade_threshold: 0.01
+
+# Market cap thresholds (in dollars)
+market_cap_thresholds:
+  large_cap_min: 100000000000
+  mid_cap_min: 10000000000
+
+# Performance targets
+performance:
+  target_gross_sharpe: 1.38
+  target_net_sharpe: 1.20
+  max_cost_drag_pct: 15
+
+# Logging
+logging:
+  level: "INFO"
+  output_dir: "logs"
+  mlflow_experiment: "B7_ExecutionCosts"

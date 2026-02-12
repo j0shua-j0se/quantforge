@@ -1,0 +1,11 @@
+B7 Execution Cost Modeling - Performance Metrics
+============================================================
+
+gross_sharpe                  : 0.9319
+net_sharpe                    : 0.9237
+sharpe_degradation_pct        : 0.8862
+gross_annual_return           : 0.1997
+net_annual_return             : 0.1979
+max_drawdown                  : -0.4040
+total_execution_costs         : 46264.2822
+num_rebalances                : 40.0000
