@@ -2,12 +2,12 @@
 # PPO reinforcement learning for portfolio optimization
 
 data:
-  features: "../../data/features/features_20260212.parquet"
-  market: "../../data/market/market_clean_20260209.parquet"
-  regimes: "../../data/regimes/regime_labels_20260212.csv"
+  features: "/app/data/features/features_20260212.parquet"
+  market: "/app/data/market/market_clean_20260209.parquet"
+  regimes: "/app/data/regimes/regime_labels_20260212.csv"
 
 ppo:
-  total_timesteps: 100000
+  total_timesteps: 10000
   n_steps: 2048
   learning_rate: 0.0003
   batch_size: 64

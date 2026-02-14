@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  b8-training:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: quantforge/b8-ppo:latest
+    container_name: quantforge-b8-training
+    
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    
+    # Volume mounts
+    volumes:
+      # Mount data from parent (read-only)
+      - ../../data:/app/data:ro
+      
+      # Mount outputs (read-write)
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    
+    # Environment variables
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - TF_ENABLE_ONEDNN_OPTS=0
+    
+    # Command (can override)
+    command: python train_ppo.py
+    
+    # Network
+    networks:
+      - quantforge-net
+
+  b8-backtest:
+    image: quantforge/b8-ppo:latest
+    container_name: quantforge-b8-backtest
+    
+    volumes:
+      - ../../data:/app/data:ro
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    
+    command: python backtest_b8.py
+    
+    depends_on:
+      - b8-training
+    
+    networks:
+      - quantforge-net
+    
+    profiles:
+      - backtest
+
+networks:
+  quantforge-net:
+    driver: bridge
