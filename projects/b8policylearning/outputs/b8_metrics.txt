@@ -1,0 +1,12 @@
+B8 RL AGENT PERFORMANCE METRICS
+==================================================
+
+total_return: -23.133852120387623
+annual_return: -3.260770340059538
+volatility: 1.9960811837395442
+sharpe_ratio: -1.6507214594240507
+sortino_ratio: -2.6150055614507526
+calmar_ratio: -0.13891241049432837
+max_drawdown: -23.473571068674755
+final_value: 768661.4787961238
+days_traded: 2000

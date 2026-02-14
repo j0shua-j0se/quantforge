@@ -9,8 +9,8 @@ project:
 
 # Data paths (relative to B7 folder)
 data:
-  prices: "data/features/features_20260212.parquet"
-  volumes: "data/market/market_clean_20260209.parquet"
+  prices: "../../data/features/features_20260212.parquet"
+  volumes: "../../data/market/market_clean_20260209.parquet"
   b6_results: "data/features/features_20260212.parquet"
 
 # Execution cost parameters

@@ -1,0 +1,4 @@
+timestamp: 2026-02-14 12:49:07
+total_timesteps: 100000
+device: cuda
+avg_reward: -3.004091169714229e-05
